@@ -9,11 +9,12 @@ We set $\mu_0=0.2$, $\mu=0.1$, $N_x=40$, $N_y=38$, $N_T=100$, hence, $h_x=h_y=0.
 Before running, you should add 'calculate_optimal_time.m' to the path.
 
 ## Reference values
-The reference values are computed via the multiple shooting algorithm. To obtain these values, run 'ref_shooting.m' file. 
+The reference values are computed via the multiple shooting algorithm. To obtain these values, run 'ref_shooting.m' file.
+
+It will generate reference values of $u(x,y,0), $u(x,y,0.5), $u(x,y,1) with the spatial discretization above.
 
 # Solving Hamilton-Jacobi-Bellman equation
 Run 'solve_pde_w_shooting'.
-
 
 
 
