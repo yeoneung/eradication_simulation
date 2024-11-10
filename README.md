@@ -4,9 +4,7 @@ This document provides Matlab codes together with explicit setup for the experim
 
 # Setup
 
-We set $\mu_0=0.2$, $\mu=0.1$, $N_x=40$, $N_y=38$, $N_T=100$, hence, $h_x=h_y=0.05$ and $\Delta t = 0.01$. For $\beta$ and $\gamma$, we use
-\[
-\beta(t)= e^{-t} \sin(t/2)+0.5\quad \text{and}\quad \gamma(t)=e^{-t} \cos(t/2)+0.7.
+We set $\mu_0=0.2$, $\mu=0.1$, $N_x=40$, $N_y=38$, $N_T=100$, hence, $h_x=h_y=0.05$ and $\Delta t = 0.01$. For $\beta$ and $\gamma$, we use $\beta(t)= e^{-t} \sin(t/2)+0.5$ and $\gamma(t)=e^{-t} \cos(t/2)+0.7$.
 \]
 
 
