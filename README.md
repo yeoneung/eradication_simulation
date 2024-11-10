@@ -11,7 +11,7 @@ Before running, you should add 'calculate_optimal_time.m' to the path.
 ## Reference values
 The reference values are computed via the multiple shooting algorithm. To obtain these values, run 'ref_shooting.m' file.
 
-It will generate reference values of $u(x,y,0), $u(x,y,0.5), $u(x,y,1) with the spatial discretization above.
+It will generate reference values of $u(x,y,0)$, $u(x,y,0.5)$, $u(x,y,1)$ with the spatial discretization above.
 
 # Solving Hamilton-Jacobi-Bellman equation
 Run 'solve_pde_w_shooting'.
