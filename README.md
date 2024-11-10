@@ -2,14 +2,6 @@
 
 This document provides Matlab codes together with explicit setup for the experimental results provided in the paper 'On a minimum eradication time for the SIR model with time-dependent coefficients' (https://arxiv.org/abs/2311.14657).
 
-\[
--\partial_t u+ \beta(t) x y \partial_x u+ x(\partial_x u)_++(\gamma(t) -\beta(t) x ) y\partial_y u=1 \quad&\text{in}\quad \Omega \times (0,\infty),\\
-u(x,\mu_0,t)=f(x,t) \quad &\text{on} \quad \left[0,\overline{\gamma}/\underline{\beta}\right]\times [0,\infty),\\
-u(0,y,t)=g(y,t) \quad &\text{on}\quad [\mu_0,\infty)\times[0,\infty),\\
-u(x,y,0)=h(x,y)\quad&\text{on}\quad \left[0,\overline{\gamma}/\underline{\beta}\right]\times [\mu_0,\infty),
-\]
-
-
 # Setup
 
 We set $\mu_0=0.2$, $\mu=0.1$, $N_x=40$, $N_y=38$, $N_T=100$, hence, $h_x=h_y=0.05$ and $\Delta t = 0.01$. For $\beta$ and $\gamma$, we use
