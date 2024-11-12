@@ -2,19 +2,30 @@
 
 This document provides Matlab codes together with explicit setup for the experimental results provided in the paper 'On a minimum eradication time for the SIR model with time-dependent coefficients' (https://arxiv.org/abs/2311.14657).
 
-## Setup
+# Project Setup and Execution Guide
 
-We set $\mu_0=0.2$, $\mu=0.1$, $N_x=40$, $N_y=38$, $N_T=100$, hence, $h_x=h_y=0.05$ and $\Delta t = 0.01$. For $\beta$ and $\gamma$, we use $\beta(t)= e^{-t} \sin(t/2)+0.5$ and $\gamma(t)=e^{-t} \cos(t/2)+0.7$.
+This manual provides step-by-step instructions to run the MATLAB files `calculate_optimal_time.m` and `solve_pde.m`.
 
-Before running, you should add 'calculate_optimal_time.m' to the path.
+## Prerequisites
 
-## Reference values
-The reference values are computed via the multiple shooting algorithm. To obtain these values, run 'ref_shooting.m' file.
+- MATLAB (R2020a or later recommended)
+- Basic understanding of MATLAB functions and scripts
 
-It will generate reference values of $u(x,y,0)$, $u(x,y,0.5)$, $u(x,y,1)$ on the domain { $(x_i,y_j) \mid x_i= 0.05 \times i, y_j= 0.05 \times j + 0.2$}.
+## Files Overview
 
-# Solving Hamilton-Jacobi-Bellman equation
-Run 'solve_pde_w_shooting'.
+1. **`calculate_optimal_time.m`** - This script defines a function for calculating the optimal time in an optimal control problem.
+2. **`solve_pde.m`** - This script calls `calculate_optimal_time` to solve a PDE using the optimal time calculated.
+
+## Instructions
+
+### Step 1: Clone the Repository
+
+If you haven't cloned the repository, use the following command to clone it to your local machine:
+
+```bash
+git clone https://github.com/yourusername/your-repository.git
+cd your-repository
+
 
 
 
