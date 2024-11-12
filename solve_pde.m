@@ -2,7 +2,7 @@
 % dx dy GREATER THAN 0.1
 dx = 0.01;
 dy = 0.01;
-dt = 0.001;
+dt = 0.005;
 mu0 = 0.1;
 
 x_range = 0:dx:1;
@@ -63,7 +63,7 @@ for n = 1:Nt-1
             u(i, j, n+1) = (u(i, j, n) + u(i-1, j, n)) / 4 + (u(i, j+1, n) + u(i, j-1, n)) / 4 + dt * ( ...
                 beta(t, 0) * x_range(i) * y_range(j) * du_dx + ...
                 x_range(i) * du_dx_positive + ...
-                (gamma(t, 0) - beta(t, 0) * x_range(i)) * y_range(j) * du_dy + 1 );
+                (gamma(t, 0) - beta(t, 0) * x_range(i)) * y_range(j) * du_dy -1 );
         end
     end
 end
