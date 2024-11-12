@@ -1,6 +1,6 @@
 # eradication_simulation
 
-This document provides Matlab codes together with explicit setup for the experimental results provided in the paper 'On a minimum eradication time for the SIR model with time-dependent coefficients' (https://arxiv.org/abs/2311.14657).
+This document provides Matlab codes for the experimental results provided in the paper 'On a minimum eradication time for the SIR model with time-dependent coefficients' (https://arxiv.org/abs/2311.14657).
 
 # Project Setup and Execution Guide
 
@@ -30,9 +30,17 @@ Execute `solve_pde.m`, which uses `calculate_optimal_time.m` internally. In the 
 
 It computes reference values of $u$ at $t=0.1,0.3,0.5$.
 
+### Step 3: Run `plot_u_surface.m` and `plot_fix_x.m`
+
+Execute plot_u_surface.m` and `plot_fix_x.m`. In the MATLAB command window, enter:
+
+`solve_pde.m` and `plot_fix_x.m`.
+
+
 ### Expected Output
 
-The script should execute the necessary computations and output the results to the MATLAB console as required by `solve_pde.m`.
+The script should execute the necessary computations and plots of the results to the MATLAB console.
+
 
 
 
