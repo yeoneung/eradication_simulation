@@ -20,9 +20,15 @@ This manual provides step-by-step instructions to run the MATLAB files `calculat
 
 Execute `solve_pde.m`, which uses `calculate_optimal_time.m` internally. In the MATLAB command window, enter:
 
-'solve_pde`
+'solve_pde`.
 
-### Step 2: Run ``
+### Step 2: Run `reference.m`
+
+Execute `solve_pde.m`, which uses `calculate_optimal_time.m` internally. In the MATLAB command window, enter:
+
+'reference`.
+
+It computes reference values of $u$ at $t=0.1,0.3,0.5$.
 
 ### Expected Output
 
