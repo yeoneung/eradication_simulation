@@ -28,6 +28,35 @@ cd your-repository
 
 
 
+### Step 2: Verify File Structure
+
+Ensure the following files are in the root of your project directory:
+
+- `calculate_optimal_time.m`
+- `solve_pde.m`
+
+### Step 3: Open MATLAB
+
+Launch MATLAB and navigate to the project directory. You can set the directory by entering the path in the MATLAB command window:
+
+```matlab
+cd 'path_to_your_project_directory'
+
+
+### Step 4: Run `solve_pde.m`
+
+Execute `solve_pde.m`, which uses `calculate_optimal_time.m` internally. In the MATLAB command window, enter:
+
+\`\`\`matlab
+solve_pde
+\`\`\`
+
+### Expected Output
+
+The script should execute the necessary computations and output the results to the MATLAB console or plot results as required by `solve_pde.m`.
+
+
+
 
 
 
