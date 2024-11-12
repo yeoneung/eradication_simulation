@@ -1,13 +1,13 @@
-% 파라미터 설정
+% Parameter settings
 % dx dy GREATER THAN 0.1
 dx = 0.01;
 dy = 0.01;
-dt=0.001;
-mu0=0.1;
+dt = 0.001;
+mu0 = 0.1;
 
 x_range = 0:dx:1;
 y_range = mu0:dy:1;
-t_range = 0:dt:.5;
+t_range = 0:dt:0.5;
 
 Nx = length(x_range);
 Ny = length(y_range);
@@ -15,13 +15,14 @@ Nt = length(t_range);
 
 u = zeros(Nx, Ny, Nt);
 
-%beta = @(t, tau) (1 / (t + tau + 0.1)/2 * sin((t/2 + tau)) + 0.1); 
-%gamma = @(t, tau) (1 / (t + tau + 0.5)/2 * cos((t/2 + tau)) + 0.5);
+% Define beta and gamma functions
+% beta = @(t, tau) (1 / (t + tau + 0.1)/2 * sin((t/2 + tau)) + 0.1); 
+% gamma = @(t, tau) (1 / (t + tau + 0.5)/2 * cos((t/2 + tau)) + 0.5);
 
-beta = @(t, tau) (exp(-t-tau) * sin((t/2 + tau/2)) + 0.5); 
-gamma = @(t, tau) (exp(-t-tau) * cos((t/2 + tau/2)) + 0.7);
+beta = @(t, tau) (exp(-t - tau) * sin((t/2 + tau/2)) + 0.5); 
+gamma = @(t, tau) (exp(-t - tau) * cos((t/2 + tau/2)) + 0.7);
 
-% 초기 조건 설정
+% Initialize initial conditions
 for i = 1:Nx
     for j = 1:Ny
         x = x_range(i);
@@ -30,7 +31,7 @@ for i = 1:Nx
     end
 end
 
-% 경계 조건 설정
+% Set boundary conditions
 for s = 1:Nt
     tau = t_range(s);
 
@@ -45,7 +46,7 @@ for s = 1:Nt
     end
 end
 
-% 시간 발전
+% Time evolution
 for n = 1:Nt-1
     t = t_range(n);
 
@@ -54,12 +55,12 @@ for n = 1:Nt-1
             du_dx = (u(i+1, j, n) - u(i-1, j, n)) / (2*dx);
             du_dy = (u(i, j+1, n) - u(i, j-1, n)) / (2*dy);
 
-            %du_dx_2 = (u(i+1, j, n) - u(i-1, j, n)) / ( 2*dx);
+            % du_dx_2 = (u(i+1, j, n) - u(i-1, j, n)) / (2*dx);
 
-            du_dx_positive = max(du_dx,0);
-            %du_dx_positive = x/(1+5*exp(-x));
+            du_dx_positive = max(du_dx, 0);
+            % du_dx_positive = x / (1 + 5 * exp(-x));
 
-            u(i, j, n+1) = (u(i, j, n)+u(i-1, j, n))/4+(u(i, j+1, n)+u(i, j-1, n))/4 + dt * ( ...
+            u(i, j, n+1) = (u(i, j, n) + u(i-1, j, n)) / 4 + (u(i, j+1, n) + u(i, j-1, n)) / 4 + dt * ( ...
                 beta(t, 0) * x_range(i) * y_range(j) * du_dx + ...
                 x_range(i) * du_dx_positive + ...
                 (gamma(t, 0) - beta(t, 0) * x_range(i)) * y_range(j) * du_dy + 1 );
@@ -67,7 +68,4 @@ for n = 1:Nt-1
     end
 end
 
-
-
-
-% 결과 출력
+% Output results
