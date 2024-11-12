@@ -35,9 +35,7 @@ Ensure the following files are in the root of your project directory:
 
 Launch MATLAB and navigate to the project directory. You can set the directory by entering the path in the MATLAB command window:
 
-```matlab
 cd 'path_to_your_project_directory'
-'''
 
 ### Step 4: Run `solve_pde.m`
 
