@@ -2,10 +2,6 @@
 
 This document provides Matlab codes for the experimental results provided in the paper 'On a minimum eradication time for the SIR model with time-dependent coefficients' (https://arxiv.org/abs/2311.14657).
 
-# Project Setup and Execution Guide
-
-This manual provides step-by-step instructions to run the MATLAB files `calculate_optimal_time.m` and `solve_pde.m`.
-
 ## Prerequisites
 
 - MATLAB (R2020a or later recommended)
