@@ -45,7 +45,7 @@ Execute `solve_pde.m`, which uses `calculate_optimal_time.m` internally. In the 
 
 ### Expected Output
 
-The script should execute the necessary computations and output the results to the MATLAB console or plot results as required by `solve_pde.m`.
+The script should execute the necessary computations and output the results to the MATLAB console as required by `solve_pde.m`.
 
 
 
