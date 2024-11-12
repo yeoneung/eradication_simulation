@@ -24,7 +24,6 @@ If you haven't cloned the repository, use the following command to clone it to y
 
 
 
-
 ### Step 2: Verify File Structure
 
 Ensure the following files are in the root of your project directory:
