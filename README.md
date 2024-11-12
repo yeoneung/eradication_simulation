@@ -22,9 +22,6 @@ This manual provides step-by-step instructions to run the MATLAB files `calculat
 
 If you haven't cloned the repository, use the following command to clone it to your local machine:
 
-```bash
-git clone https://github.com/yourusername/your-repository.git
-cd your-repository
 
 
 
