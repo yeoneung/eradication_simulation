@@ -1,48 +1,44 @@
-% calculate_optimal_time.m
 function [optimal_time, optimal_control, I] = calculate_optimal_time(x, y, s)
-    % x, y는 초기 조건 S(1)과 I(1)이고, s는 tau 값입니다.
+    % x, y are the initial conditions S(1) and I(1), and s is the tau value.
     
-    % 파라미터 설정
+    % Parameter settings
     dts = 0.01;
     N = 1000;
-    segments = 2;  % multiple shooting을 위해 시간을 여러 구간으로 나눔
+    segments = 2;  % Divide time into multiple segments for multiple shooting
     segment_length = N / segments;
     mu = 0.1/2;
 
-    % 전역 변수로 초기값 설정
+    % Set initial values as global variables
     global S0 I0;
-    S0 = x; % S(1) 값을 x로 설정
-    I0 = y; % I(1) 값을 y로 설정
+    S0 = x; % Set S(1) to x
+    I0 = y; % Set I(1) to y
 
-    % 전염병 매개변수
-    %beta = @(t, tau) (1 / (t + tau + 0.1)/2 * sin((t/2 + tau)) + 0.1); 
-    %gamma = @(t, tau) (1 / (t + tau + 0.5)/2 * cos((t/2 + tau)) + 0.5);
+    % Epidemic parameters
+    beta = @(t, tau) (exp(-t-tau) * sin((t/2 + tau/2)) + 0.5); 
+    gamma = @(t, tau) (exp(-t-tau) * cos((t/2 + tau/2)) + 0.7);
 
-beta = @(t, tau) (exp(-t-tau) * sin((t/2 + tau/2)) + 0.5); 
-gamma = @(t, tau) (exp(-t-tau) * cos((t/2 + tau/2)) + 0.7);
-
-    % 초기 제어 변수 및 상태 설정
-    initial_control = ones(N, 1);  % 전체 제어 변수 초기값
-    initial_conditions = [S0; I0]; % 초기 상태
-    lb = zeros(N, 1);               % 제어 변수 하한
-    ub = ones(N, 1);                % 제어 변수 상한
+    % Initial control variable and state settings
+    initial_control = ones(N, 1);  % Initial values for the control variable
+    initial_conditions = [S0; I0]; % Initial state
+    lb = zeros(N, 1);               % Lower bound for control variable
+    ub = ones(N, 1);                % Upper bound for control variable
     
-    % Objective function 정의
+    % Define the objective function
     objective_function = @(U) multiple_shooting_objective(U, initial_conditions, segments, segment_length, dts, mu, s, beta, gamma);
     
-    % fmincon 옵션 설정
+    % Set fmincon options
     options = optimoptions('fmincon', 'Display', 'off', 'Algorithm', 'sqp');
 
-    % 최적화 수행
+    % Perform optimization
     optimal_control = fmincon(objective_function, initial_control, [], [], [], [], lb, ub, [], options);
 
-    % 최적 시간 계산
+    % Compute optimal time
     optimal_time = objective_function(optimal_control) * dts;
 
-    % 최적 제어에 따른 상태 변수 (S, I 계산)
+    % Compute state variables (S, I) based on optimal control
     [S, I] = dynamics(optimal_control, N, dts, s, beta, gamma);
     
-    % 최종 감염자 수 (I) 반환
+    % Return the final number of infected individuals (I)
     I = I;
 end
 
@@ -51,25 +47,25 @@ function T = multiple_shooting_objective(U, initial_conditions, segments, segmen
     S0 = initial_conditions(1);
     I0 = initial_conditions(2);
     
-    % 각 구간에 대해 초기 조건을 설정하고 연속성 제약을 적용
+    % Set initial conditions for each segment and apply continuity constraints
     T = 0;
     for seg = 1:segments
         start_idx = (seg - 1) * segment_length + 1;
         end_idx = seg * segment_length;
 
-        % 현재 구간 제어 변수
+        % Control variable for the current segment
         U_segment = U(start_idx:end_idx);
 
-        % 동역학 계산 (구간 내에서)
+        % Compute dynamics within the segment
         [S, I] = dynamics(U_segment, segment_length, dt, tau, beta, gamma);
 
-        % 다음 구간의 초기 조건이 이전 구간의 마지막 상태와 같도록 제약
+        % Ensure continuity by setting the initial condition of the next segment
         if seg < segments
-            S0 = S(end);  % 다음 구간의 초기 S
-            I0 = I(end);  % 다음 구간의 초기 I
+            S0 = S(end);  % Initial S for the next segment
+            I0 = I(end);  % Initial I for the next segment
         end
 
-        % 감염자의 수가 임계값 이하일 때의 시간을 확인
+        % Check the time when the number of infected individuals falls below the threshold
         for k = 1:segment_length
             if I(k) < mu
                 T = T + (seg - 1) * segment_length + k;
@@ -78,7 +74,7 @@ function T = multiple_shooting_objective(U, initial_conditions, segments, segmen
         end
     end
     
-    % 만약 감염자 수가 모든 구간에서 임계값 이하로 떨어지지 않으면 전체 구간 길이 반환
+    % If the number of infected individuals never falls below the threshold, return the total segment length
     T = segments * segment_length;
 end
 
